@@ -17,7 +17,6 @@ import CoreLocation
 class ViewController: UIViewController {
 
     let myLocalManager = CLLocationManager()
-    
     let backgroundImage = {
         let image = UIImageView()
         image.image = UIImage(named: "라라랜드")
@@ -25,36 +24,28 @@ class ViewController: UIViewController {
         return image
     }()
     let locationLabel = {
-        let label = UILabel()
-        label.textColor = .white
+        let label = ConfigueLabel()
         label.font = .boldSystemFont(ofSize: 30)
-        label.textAlignment = .center
         return label
     }()
     let dateLabel = {
-        let label = UILabel()
-        label.textColor = .white
+        let label = ConfigueLabel()
         label.font = .systemFont(ofSize: 20)
-        label.textAlignment = .center
         return label
     }()
     lazy var temperatureLabel = {
-       let label = UILabel()
-        label.textColor = .white
+       let label = ConfigueLabel()
+        
         label.font = .boldSystemFont(ofSize: 50)
-        label.textAlignment = .center
-//        label.text = "\(Data.today?.main.temp ?? 0.0)℃"
+        
         return label
     }()
-    let otherFactors = {
-        let label = UILabel()
-        label.textColor = .white
-        label.textAlignment = .center
+    let otherFactors = ConfigueLabel()
+    let weatherImage = UIImageView()
+    let weatherLabel = {
+        let label = ConfigueLabel()
+        label.numberOfLines = 2
         return label
-    }()
-    let weatherImage = {
-       let image = UIImageView()
-        return image
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,20 +55,7 @@ class ViewController: UIViewController {
         configureLayout()
         checkDeviceLocationAuthorization()
         callWeather(lat: Data.lat, lon: Data.lon)
-        getLocation()
-        locationLabel.text = Data.location
-        dateLabel.text = getDate()
-    }
-    
-    func getLocation() {
-        let findLocation = CLLocation(latitude: Data.lat, longitude: Data.lon)
-        let geocoder = CLGeocoder()
-        let locale = Locale(identifier: "Ko-kr")
-        geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale, completionHandler: {(placemarks, error) in
-            if let address: [CLPlacemark] = placemarks {
-                if let name: String = address.last?.name { Data.location = name }
-            }
-        })
+        dateLabel.text = Data.getDate()
     }
     func dataHandling() {
         myLocalManager.delegate = self
@@ -95,6 +73,7 @@ class ViewController: UIViewController {
         view.addSubview(temperatureLabel)
         view.addSubview(otherFactors)
         view.addSubview(weatherImage)
+        view.addSubview(weatherLabel)
     }
     func configureLayout() {
         backgroundImage.snp.makeConstraints { make in
@@ -121,13 +100,10 @@ class ViewController: UIViewController {
             make.centerX.equalTo(view)
             make.size.equalTo(100)
         }
-    }
-    
-    func getDate() -> String {
-        let toString = Data.dateFormatter
-        toString.dateFormat = "yyyy년 MM월 dd일 HH시 mm분"
-        let convertNowStr = toString.string(from: Date())
-        return convertNowStr
+        weatherLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(weatherImage.snp.centerY)
+            make.leading.equalTo(weatherImage.snp.trailing)
+        }
     }
     func callWeather(lat: Double, lon: Double) {
         let url = "https://api.openweathermap.org/data/2.5/weather?"
@@ -141,20 +117,20 @@ class ViewController: UIViewController {
         AF.request(url, parameters: param).responseDecodable(of: Weather.self) { response in
             switch response.result {
             case .success(let value):
-                Data.today = value
-                self.temperatureLabel.text = "\(Data.today?.main.temp ?? 0.0)℃"
-                self.otherFactors.text = "습도 : \(Data.today?.main.humidity ?? 0)% | 풍속 : \(Data.today?.wind.speed ?? 0.0)m/s"
-                
-                let url = URL(string: "https://openweathermap.org/img/wn/\(Data.today?.weather[0].icon ?? "04d")@2x.png")
-                self.weatherImage.kf.setImage(with: url)
+                self.showWeather(data: value)
             case .failure(let error):
                 print(error)
             }
         }
     }
+    func showWeather(data: Weather?) {
+        self.temperatureLabel.text = "\(data?.main.temp ?? 0.0)℃"
+        self.otherFactors.text = "습도 : \(data?.main.humidity ?? 0)% | 풍속 : \(data?.wind.speed ?? 0.0)m/s"
+        let url = URL(string: "https://openweathermap.org/img/wn/\(data?.weather[0].icon ?? "04d")@2x.png")
+        self.weatherImage.kf.setImage(with: url)
+        self.weatherLabel.text = "오늘은\n\(data?.weather[0].description ?? "날씨")"
+    }
 }
-
-
 extension ViewController {
     func checkDeviceLocationAuthorization() {
         if CLLocationManager.locationServicesEnabled() {
@@ -191,9 +167,20 @@ extension ViewController: CLLocationManagerDelegate {
             Data.lat = coordinate.latitude
             Data.lon = coordinate.longitude
             callWeather(lat: Data.lat, lon: Data.lon)
-            
+            getLocation(lat: Data.lat, lon: Data.lon)
         }
         myLocalManager.stopUpdatingLocation()
+    }
+    func getLocation(lat: Double, lon: Double) {
+        let findLocation = CLLocation(latitude: lat, longitude: lon)
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale, completionHandler: {(placemarks, error) in
+            if let address: [CLPlacemark] = placemarks {
+                if let name: String = address.last?.name { Data.location = name }
+                self.locationLabel.text = Data.location
+            }
+        })
     }
 }
 
