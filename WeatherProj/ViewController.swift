@@ -15,30 +15,37 @@ import CoreLocation
 
 class ViewController: UIViewController {
 
-    let weather: [Weather] = []
     let myLocalManager = CLLocationManager()
-    var lat: Double = 0.0
-    var lon: Double = 0.0
     
     let backgroundImage = {
         let image = UIImageView()
+        image.image = UIImage(named: "라라랜드")
+        image.contentMode = .scaleAspectFit
         return image
     }()
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewLayout())
-    
-       static func CollectionViewLayout() -> UICollectionViewLayout{
-           let layout = UICollectionViewFlowLayout()
-           let sectionSpacing: CGFloat = 10
-           let cellSpacing: CGFloat = 10
-           let width = UIScreen.main.bounds.width - sectionSpacing
-           layout.itemSize = CGSize(width: width - 20, height: width + 120 )
-           layout.scrollDirection = .horizontal
-           layout.minimumInteritemSpacing = cellSpacing
-           layout.minimumLineSpacing = cellSpacing
-           layout.sectionInset = UIEdgeInsets(top: sectionSpacing, left: sectionSpacing, bottom: sectionSpacing, right: sectionSpacing)
-           return layout
-       }
-    
+    let locationLabel = {
+        let label = UILabel()
+        label.text = "문래동"
+        label.textColor = .white
+        label.font = .boldSystemFont(ofSize: 30)
+        label.textAlignment = .center
+        return label
+    }()
+    let dateLabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 20)
+        label.textAlignment = .center
+        return label
+    }()
+    lazy var temperatureLabel = {
+       let label = UILabel()
+        label.textColor = .white
+        label.font = .boldSystemFont(ofSize: 50)
+        label.textAlignment = .center
+//        label.text = "\(Data.today?.main.temp ?? 0.0)℃"
+        return label
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -46,31 +53,49 @@ class ViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         checkDeviceLocationAuthorization()
+        callWeather(lat: Data.lat, lon: Data.lon)
+        dateLabel.text = getDate()
     }
     func dataHandling() {
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(WeatherCollectionViewCell.self, forCellWithReuseIdentifier: "WeatherCollectionViewCell")
         myLocalManager.delegate = self
     }
-    func configureUI() {
-        view.backgroundColor = .white
+    func configureUI() { //   rgb(113,108,217)    rgb(97,97,161)
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        view.backgroundColor = UIColor(red: 97/255, green: 97/255, blue: 161/255, alpha: 1)
         navigationItem.title = "날씨요정? IT'S ME."
     }
     func configureHierarchy() {
         view.addSubview(backgroundImage)
-        view.addSubview(collectionView)
+        view.addSubview(locationLabel)
+        view.addSubview(dateLabel)
+        view.addSubview(temperatureLabel)
+        
     }
     func configureLayout() {
         backgroundImage.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        collectionView.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.verticalEdges.equalTo(view.safeAreaLayoutGuide).inset(40)
+        locationLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).inset(50)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+        }
+        dateLabel.snp.makeConstraints { make in
+            make.top.equalTo(locationLabel.snp.bottom).offset(15)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+        }
+        temperatureLabel.snp.makeConstraints { make in
+            make.top.equalTo(dateLabel.snp.bottom).offset(15)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
         }
     }
     
+    func getDate() -> String {
+        let toString = Data.dateFormatter
+        toString.dateFormat = "yyyy년 MM월 dd일 HH시 mm분"
+        let convertNowStr = toString.string(from: Date())
+        return convertNowStr
+    }
     func callWeather(lat: Double, lon: Double) {
         let url = "https://api.openweathermap.org/data/2.5/weather?"
         let param: Parameters = [
@@ -83,7 +108,9 @@ class ViewController: UIViewController {
         AF.request(url, parameters: param).responseDecodable(of: Weather.self) { response in
             switch response.result {
             case .success(let value):
-                print(value)
+                Data.today = value
+                print(Data.today!)
+                self.temperatureLabel.text = "\(Data.today?.main.temp ?? 0.0)℃"
             case .failure(let error):
                 print(error)
             }
@@ -125,9 +152,9 @@ extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         checkDeviceLocationAuthorization()
         if let coordinate = locations.last?.coordinate {
-            lat = coordinate.latitude
-            lon = coordinate.longitude
-            callWeather(lat: lat, lon: lon)
+            Data.lat = coordinate.latitude
+            Data.lon = coordinate.longitude
+            callWeather(lat: Data.lat, lon: Data.lon)
         }
         myLocalManager.stopUpdatingLocation()
     }
@@ -139,18 +166,3 @@ extension ViewController: CLLocationManagerDelegate {
 //    }
 }
 
-
-extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeatherCollectionViewCell", for: indexPath) as? WeatherCollectionViewCell else { return WeatherCollectionViewCell() }
-        
-        
-        return cell
-    }
-    
-    
-}

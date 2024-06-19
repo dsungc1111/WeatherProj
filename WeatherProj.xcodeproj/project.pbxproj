@@ -18,6 +18,7 @@
 		8BD339D02C22A7CC00B396CA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD339CF2C22A7CC00B396CA /* Alamofire */; };
 		8BD339D32C22A7D600B396CA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD339D22C22A7D600B396CA /* SnapKit */; };
 		8BD339D52C22CC9000B396CA /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339D42C22CC9000B396CA /* WeatherCollectionViewCell.swift */; };
+		8BD339D72C22E36900B396CA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339D62C22E36900B396CA /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		8BD339CA2C22A1DD00B396CA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8BD339CC2C22A25900B396CA /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		8BD339D42C22CC9000B396CA /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
+		8BD339D62C22E36900B396CA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +78,7 @@
 				8BD339C82C22A10700B396CA /* WeatherInfo.swift */,
 				8BD339CC2C22A25900B396CA /* APIKey.swift */,
 				8BD339D42C22CC9000B396CA /* WeatherCollectionViewCell.swift */,
+				8BD339D62C22E36900B396CA /* Data.swift */,
 			);
 			path = WeatherProj;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BD339D72C22E36900B396CA /* Data.swift in Sources */,
 				8BD339C92C22A10700B396CA /* WeatherInfo.swift in Sources */,
 				8BD339B92C22A0B400B396CA /* ViewController.swift in Sources */,
 				8BD339B52C22A0B400B396CA /* AppDelegate.swift in Sources */,

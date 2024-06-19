@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Sys: Decodable {
-    let type, id, sunrise, sunset: Int
-    let country: String
-    
-}
+//struct Sys: Decodable {
+//    let type, id, sunrise, sunset: Int
+//    let country: String
+//    
+//}
 
 struct CloudsInfo: Decodable {
     let all: Int
@@ -45,6 +45,5 @@ struct Weather: Decodable {
     let wind: WindInfo
     let clouds: CloudsInfo
     let dt: Int
-    let sys: Sys
     let name: String
 }
