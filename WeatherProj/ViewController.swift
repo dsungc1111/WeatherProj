@@ -26,7 +26,6 @@ class ViewController: UIViewController {
     }()
     let locationLabel = {
         let label = UILabel()
-        label.text = "문래동"
         label.textColor = .white
         label.font = .boldSystemFont(ofSize: 30)
         label.textAlignment = .center
@@ -65,7 +64,20 @@ class ViewController: UIViewController {
         configureLayout()
         checkDeviceLocationAuthorization()
         callWeather(lat: Data.lat, lon: Data.lon)
+        getLocation()
+        locationLabel.text = Data.location
         dateLabel.text = getDate()
+    }
+    
+    func getLocation() {
+        let findLocation = CLLocation(latitude: Data.lat, longitude: Data.lon)
+        let geocoder = CLGeocoder()
+        let locale = Locale(identifier: "Ko-kr")
+        geocoder.reverseGeocodeLocation(findLocation, preferredLocale: locale, completionHandler: {(placemarks, error) in
+            if let address: [CLPlacemark] = placemarks {
+                if let name: String = address.last?.name { Data.location = name }
+            }
+        })
     }
     func dataHandling() {
         myLocalManager.delegate = self
@@ -130,7 +142,6 @@ class ViewController: UIViewController {
             switch response.result {
             case .success(let value):
                 Data.today = value
-                print(Data.today?.weather[0].icon)
                 self.temperatureLabel.text = "\(Data.today?.main.temp ?? 0.0)℃"
                 self.otherFactors.text = "습도 : \(Data.today?.main.humidity ?? 0)% | 풍속 : \(Data.today?.wind.speed ?? 0.0)m/s"
                 
@@ -180,14 +191,9 @@ extension ViewController: CLLocationManagerDelegate {
             Data.lat = coordinate.latitude
             Data.lon = coordinate.longitude
             callWeather(lat: Data.lat, lon: Data.lon)
+            
         }
         myLocalManager.stopUpdatingLocation()
     }
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: any Error) {
-//        print(#function)
-//    }
-//    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-//        print("iOS14+")
-//    }
 }
 

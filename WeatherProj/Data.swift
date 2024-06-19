@@ -14,4 +14,5 @@ struct Data {
     static var lat: Double = 0.0
     static var lon: Double = 0.0
     static var aa: String = ""
+    static var location: String = ""
 }
