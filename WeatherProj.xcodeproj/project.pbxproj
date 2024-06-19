@@ -14,6 +14,9 @@
 		8BD339C12C22A0B600B396CA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 8BD339C02C22A0B600B396CA /* Base */; };
 		8BD339C92C22A10700B396CA /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339C82C22A10700B396CA /* WeatherInfo.swift */; };
 		8BD339CB2C22A1DD00B396CA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 8BD339CA2C22A1DD00B396CA /* .gitignore */; };
+		8BD339CD2C22A25900B396CA /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339CC2C22A25900B396CA /* APIKey.swift */; };
+		8BD339D02C22A7CC00B396CA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD339CF2C22A7CC00B396CA /* Alamofire */; };
+		8BD339D32C22A7D600B396CA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD339D22C22A7D600B396CA /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,7 @@
 		8BD339C22C22A0B600B396CA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8BD339C82C22A10700B396CA /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
 		8BD339CA2C22A1DD00B396CA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		8BD339CC2C22A25900B396CA /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +37,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BD339D02C22A7CC00B396CA /* Alamofire in Frameworks */,
+				8BD339D32C22A7D600B396CA /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +72,7 @@
 				8BD339BF2C22A0B600B396CA /* LaunchScreen.storyboard */,
 				8BD339C22C22A0B600B396CA /* Info.plist */,
 				8BD339C82C22A10700B396CA /* WeatherInfo.swift */,
+				8BD339CC2C22A25900B396CA /* APIKey.swift */,
 			);
 			path = WeatherProj;
 			sourceTree = "<group>";
@@ -86,6 +93,10 @@
 			dependencies = (
 			);
 			name = WeatherProj;
+			packageProductDependencies = (
+				8BD339CF2C22A7CC00B396CA /* Alamofire */,
+				8BD339D22C22A7D600B396CA /* SnapKit */,
+			);
 			productName = WeatherProj;
 			productReference = 8BD339B12C22A0B400B396CA /* WeatherProj.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +125,10 @@
 				Base,
 			);
 			mainGroup = 8BD339A82C22A0B400B396CA;
+			packageReferences = (
+				8BD339CE2C22A7CC00B396CA /* XCRemoteSwiftPackageReference "Alamofire" */,
+				8BD339D12C22A7D600B396CA /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 8BD339B22C22A0B400B396CA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -145,6 +160,7 @@
 				8BD339B92C22A0B400B396CA /* ViewController.swift in Sources */,
 				8BD339B52C22A0B400B396CA /* AppDelegate.swift in Sources */,
 				8BD339B72C22A0B400B396CA /* SceneDelegate.swift in Sources */,
+				8BD339CD2C22A25900B396CA /* APIKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +379,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8BD339CE2C22A7CC00B396CA /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		8BD339D12C22A7D600B396CA /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8BD339CF2C22A7CC00B396CA /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BD339CE2C22A7CC00B396CA /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		8BD339D22C22A7D600B396CA /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8BD339D12C22A7D600B396CA /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8BD339A92C22A0B400B396CA /* Project object */;
 }
