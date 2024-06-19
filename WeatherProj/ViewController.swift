@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import MapKit
 import SnapKit
+import Kingfisher
 //1
 import CoreLocation
 
@@ -20,7 +21,7 @@ class ViewController: UIViewController {
     let backgroundImage = {
         let image = UIImageView()
         image.image = UIImage(named: "라라랜드")
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         return image
     }()
     let locationLabel = {
@@ -46,6 +47,16 @@ class ViewController: UIViewController {
 //        label.text = "\(Data.today?.main.temp ?? 0.0)℃"
         return label
     }()
+    let otherFactors = {
+        let label = UILabel()
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+    let weatherImage = {
+       let image = UIImageView()
+        return image
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
@@ -70,11 +81,12 @@ class ViewController: UIViewController {
         view.addSubview(locationLabel)
         view.addSubview(dateLabel)
         view.addSubview(temperatureLabel)
-        
+        view.addSubview(otherFactors)
+        view.addSubview(weatherImage)
     }
     func configureLayout() {
         backgroundImage.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.edges.equalTo(view)
         }
         locationLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).inset(50)
@@ -87,6 +99,15 @@ class ViewController: UIViewController {
         temperatureLabel.snp.makeConstraints { make in
             make.top.equalTo(dateLabel.snp.bottom).offset(15)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+        }
+        otherFactors.snp.makeConstraints { make in
+            make.top.equalTo(temperatureLabel.snp.bottom).offset(15)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(10)
+        }
+        weatherImage.snp.makeConstraints { make in
+            make.top.equalTo(otherFactors.snp.bottom).offset(15)
+            make.centerX.equalTo(view)
+            make.size.equalTo(100)
         }
     }
     
@@ -109,8 +130,12 @@ class ViewController: UIViewController {
             switch response.result {
             case .success(let value):
                 Data.today = value
-                print(Data.today!)
+                print(Data.today?.weather[0].icon)
                 self.temperatureLabel.text = "\(Data.today?.main.temp ?? 0.0)℃"
+                self.otherFactors.text = "습도 : \(Data.today?.main.humidity ?? 0)% | 풍속 : \(Data.today?.wind.speed ?? 0.0)m/s"
+                
+                let url = URL(string: "https://openweathermap.org/img/wn/\(Data.today?.weather[0].icon ?? "04d")@2x.png")
+                self.weatherImage.kf.setImage(with: url)
             case .failure(let error):
                 print(error)
             }
