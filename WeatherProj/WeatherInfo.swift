@@ -7,49 +7,44 @@
 
 import Foundation
 
-struct Sys {
+struct Sys: Decodable {
     let type, id, sunrise, sunset: Int
     let country: String
     
 }
 
-struct CloudsInfo {
+struct CloudsInfo: Decodable {
     let all: Int
 }
 
-struct WindInfo {
+struct WindInfo: Decodable {
     let speed: Double
     let deg: Int
-    let gust: Double
 }
 
-struct WeatherInfo {
-    let temp: Double
-    let feels_like: Double
-    let temp_min: Double
-    let temp_max: Double
-    let pressure: Int
-    let humidity: Int
+struct WeatherInfo: Decodable {
+    let temp, feels_like, temp_min, temp_max : Double
+    let pressure, humidity: Int
     
 }
 
-struct TodayWeather {
+struct TodayWeather: Decodable {
     let id: Int
-    let main: String
-    let description: String
-    let icon: String
+    let main, description, icon: String
+}
+struct Coord: Decodable {
+    let lon, lat: Double
 }
 
-
-struct Weather {
-    let coord: [Int]
+struct Weather: Decodable {
+    let coord: Coord
     let weather : [TodayWeather]
     let base: String
-    let main: [WeatherInfo]
+    let main: WeatherInfo
     let visibility: Int
-    let wind: [WindInfo]
-    let clouds: [CloudsInfo]
+    let wind: WindInfo
+    let clouds: CloudsInfo
     let dt: Int
-    let sys: [Sys]
+    let sys: Sys
     let name: String
 }
