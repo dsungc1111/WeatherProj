@@ -17,6 +17,7 @@
 		8BD339CD2C22A25900B396CA /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339CC2C22A25900B396CA /* APIKey.swift */; };
 		8BD339D02C22A7CC00B396CA /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD339CF2C22A7CC00B396CA /* Alamofire */; };
 		8BD339D32C22A7D600B396CA /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD339D22C22A7D600B396CA /* SnapKit */; };
+		8BD339D52C22CC9000B396CA /* WeatherCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339D42C22CC9000B396CA /* WeatherCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		8BD339C82C22A10700B396CA /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
 		8BD339CA2C22A1DD00B396CA /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		8BD339CC2C22A25900B396CA /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		8BD339D42C22CC9000B396CA /* WeatherCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				8BD339C22C22A0B600B396CA /* Info.plist */,
 				8BD339C82C22A10700B396CA /* WeatherInfo.swift */,
 				8BD339CC2C22A25900B396CA /* APIKey.swift */,
+				8BD339D42C22CC9000B396CA /* WeatherCollectionViewCell.swift */,
 			);
 			path = WeatherProj;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 				8BD339C92C22A10700B396CA /* WeatherInfo.swift in Sources */,
 				8BD339B92C22A0B400B396CA /* ViewController.swift in Sources */,
 				8BD339B52C22A0B400B396CA /* AppDelegate.swift in Sources */,
+				8BD339D52C22CC9000B396CA /* WeatherCollectionViewCell.swift in Sources */,
 				8BD339B72C22A0B400B396CA /* SceneDelegate.swift in Sources */,
 				8BD339CD2C22A25900B396CA /* APIKey.swift in Sources */,
 			);
