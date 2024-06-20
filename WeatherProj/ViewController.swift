@@ -15,7 +15,7 @@ import CoreLocation
 
 
 class ViewController: UIViewController {
-
+    
     let myLocalManager = CLLocationManager()
     let backgroundImage = {
         let image = UIImageView()
@@ -34,10 +34,8 @@ class ViewController: UIViewController {
         return label
     }()
     lazy var temperatureLabel = {
-       let label = ConfigueLabel()
-        
+        let label = ConfigueLabel()
         label.font = .boldSystemFont(ofSize: 50)
-        
         return label
     }()
     let otherFactors = ConfigueLabel()
@@ -56,15 +54,14 @@ class ViewController: UIViewController {
         checkDeviceLocationAuthorization()
         callWeather(lat: Data.lat, lon: Data.lon)
         dateLabel.text = Data.getDate()
+        weatherLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
     }
     func dataHandling() {
         myLocalManager.delegate = self
     }
     func configureUI() { //   rgb(113,108,217)    rgb(97,97,161)
         navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
         view.backgroundColor = UIColor(red: 97/255, green: 97/255, blue: 161/255, alpha: 1)
-        navigationItem.title = "날씨요정? IT'S ME."
     }
     func configureHierarchy() {
         view.addSubview(backgroundImage)
@@ -128,7 +125,7 @@ class ViewController: UIViewController {
         self.otherFactors.text = "습도 : \(data?.main.humidity ?? 0)% | 풍속 : \(data?.wind.speed ?? 0.0)m/s"
         let url = URL(string: "https://openweathermap.org/img/wn/\(data?.weather[0].icon ?? "04d")@2x.png")
         self.weatherImage.kf.setImage(with: url)
-        self.weatherLabel.text = "오늘은\n\(data?.weather[0].description ?? "날씨")"
+        self.weatherLabel.text = "TODAY\n\(data?.weather[0].description ?? "날씨")"
     }
 }
 extension ViewController {

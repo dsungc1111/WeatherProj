@@ -35,6 +35,9 @@
 		8BD339CC2C22A25900B396CA /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		8BD339D62C22E36900B396CA /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		8BD339E12C23A20100B396CA /* ConfigueLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigueLabel.swift; sourceTree = "<group>"; };
+		8BD339E42C23A66900B396CA /* ONE Mobile Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ONE Mobile Regular.ttf"; sourceTree = "<group>"; };
+		8BD339E52C23A66900B396CA /* ONE Mobile Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ONE Mobile Light.ttf"; sourceTree = "<group>"; };
+		8BD339E62C23A66A00B396CA /* ONE Mobile Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ONE Mobile Bold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +90,7 @@
 		8BD339DF2C23A1D300B396CA /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				8BD339E32C23A65B00B396CA /* Font */,
 				8BD339C82C22A10700B396CA /* WeatherInfo.swift */,
 				8BD339D62C22E36900B396CA /* Data.swift */,
 			);
@@ -99,6 +103,16 @@
 				8BD339E12C23A20100B396CA /* ConfigueLabel.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		8BD339E32C23A65B00B396CA /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				8BD339E62C23A66A00B396CA /* ONE Mobile Bold.ttf */,
+				8BD339E52C23A66900B396CA /* ONE Mobile Light.ttf */,
+				8BD339E42C23A66900B396CA /* ONE Mobile Regular.ttf */,
+			);
+			path = Font;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

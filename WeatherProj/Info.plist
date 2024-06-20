@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>ONE Mobile Bold.ttf</string>
+		<string>ONE Mobile Regular.ttf</string>
+		<string>ONE Mobile Light.ttf</string>
+	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>위치정보를 받아 그 위치에 해당하는 날씨 표현</string>
 	<key>UIApplicationSceneManifest</key>
