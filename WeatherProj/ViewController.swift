@@ -25,17 +25,17 @@ class ViewController: UIViewController {
     }()
     let locationLabel = {
         let label = ConfigueLabel()
-        label.font = .boldSystemFont(ofSize: 30)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
         return label
     }()
     let dateLabel = {
         let label = ConfigueLabel()
-        label.font = .systemFont(ofSize: 20)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 20)
         return label
     }()
     lazy var temperatureLabel = {
         let label = ConfigueLabel()
-        label.font = .boldSystemFont(ofSize: 50)
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 50)
         return label
     }()
     let otherFactors = ConfigueLabel()
@@ -54,7 +54,6 @@ class ViewController: UIViewController {
         checkDeviceLocationAuthorization()
         callWeather(lat: Data.lat, lon: Data.lon)
         dateLabel.text = Data.getDate()
-        weatherLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 15)
     }
     func dataHandling() {
         myLocalManager.delegate = self

@@ -21,6 +21,7 @@ class ConfigueLabel: UILabel {
     func configureLabel() {
         textColor = .white
         textAlignment = .center
+        font = UIFont(name: "HelveticaNeue-Bold", size: 15)
     }
     
 }
