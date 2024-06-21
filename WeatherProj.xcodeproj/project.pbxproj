@@ -20,6 +20,7 @@
 		8BD339D72C22E36900B396CA /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339D62C22E36900B396CA /* Data.swift */; };
 		8BD339DC2C2311AE00B396CA /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 8BD339DB2C2311AE00B396CA /* Kingfisher */; };
 		8BD339E22C23A20100B396CA /* ConfigueLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339E12C23A20100B396CA /* ConfigueLabel.swift */; };
+		8BD339F42C25737D00B396CA /* GetWeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD339F32C25737D00B396CA /* GetWeatherInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		8BD339E42C23A66900B396CA /* ONE Mobile Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ONE Mobile Regular.ttf"; sourceTree = "<group>"; };
 		8BD339E52C23A66900B396CA /* ONE Mobile Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ONE Mobile Light.ttf"; sourceTree = "<group>"; };
 		8BD339E62C23A66A00B396CA /* ONE Mobile Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ONE Mobile Bold.ttf"; sourceTree = "<group>"; };
+		8BD339F32C25737D00B396CA /* GetWeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetWeatherInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				8BD339BF2C22A0B600B396CA /* LaunchScreen.storyboard */,
 				8BD339C22C22A0B600B396CA /* Info.plist */,
 				8BD339CC2C22A25900B396CA /* APIKey.swift */,
+				8BD339F32C25737D00B396CA /* GetWeatherInfo.swift */,
 			);
 			path = WeatherProj;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BD339F42C25737D00B396CA /* GetWeatherInfo.swift in Sources */,
 				8BD339D72C22E36900B396CA /* Data.swift in Sources */,
 				8BD339C92C22A10700B396CA /* WeatherInfo.swift in Sources */,
 				8BD339B92C22A0B400B396CA /* ViewController.swift in Sources */,
@@ -429,7 +433,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 5.9.1;
 			};
 		};
@@ -437,7 +441,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 5.7.1;
 			};
 		};
@@ -445,7 +449,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = upToNextMinorVersion;
 				minimumVersion = 7.12.0;
 			};
 		};

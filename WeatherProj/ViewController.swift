@@ -52,7 +52,9 @@ class ViewController: UIViewController {
         configureHierarchy()
         configureLayout()
         checkDeviceLocationAuthorization()
-        callWeather(lat: Data.lat, lon: Data.lon)
+        GetWeatherInfo.shared.callWeather(lat: Data.lat, lon: Data.lon) { result in
+            self.showWeather(data: result)
+        }
         dateLabel.text = Data.getDate()
     }
     func dataHandling() {
@@ -101,24 +103,24 @@ class ViewController: UIViewController {
             make.leading.equalTo(weatherImage.snp.trailing)
         }
     }
-    func callWeather(lat: Double, lon: Double) {
-        let url = "https://api.openweathermap.org/data/2.5/weather?"
-        let param: Parameters = [
-            "APIKey" : APIKey().weatherKey,
-            "lat" : "\(lat)",
-            "lon" : "\(lon)",
-            "units" : "metric",
-            "lang" : "kr"
-        ]
-        AF.request(url, parameters: param).responseDecodable(of: Weather.self) { response in
-            switch response.result {
-            case .success(let value):
-                self.showWeather(data: value)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+//    func callWeather(lat: Double, lon: Double) {
+//        let url = "https://api.openweathermap.org/data/2.5/weather?"
+//        let param: Parameters = [
+//            "APIKey" : APIKey().weatherKey,
+//            "lat" : "\(lat)",
+//            "lon" : "\(lon)",
+//            "units" : "metric",
+//            "lang" : "kr"
+//        ]
+//        AF.request(url, parameters: param).responseDecodable(of: Weather.self) { response in
+//            switch response.result {
+//            case .success(let value):
+//                self.showWeather(data: value)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
     func showWeather(data: Weather?) {
         self.temperatureLabel.text = "\(data?.main.temp ?? 0.0)℃"
         self.otherFactors.text = "습도 : \(data?.main.humidity ?? 0)% | 풍속 : \(data?.wind.speed ?? 0.0)m/s"
@@ -162,7 +164,9 @@ extension ViewController: CLLocationManagerDelegate {
         if let coordinate = locations.last?.coordinate {
             Data.lat = coordinate.latitude
             Data.lon = coordinate.longitude
-            callWeather(lat: Data.lat, lon: Data.lon)
+            GetWeatherInfo.shared.callWeather(lat: Data.lat, lon: Data.lon) { result in
+                self.showWeather(data: result)
+            }
             getLocation(lat: Data.lat, lon: Data.lon)
         }
         myLocalManager.stopUpdatingLocation()
