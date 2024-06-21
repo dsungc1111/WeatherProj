@@ -103,24 +103,6 @@ class ViewController: UIViewController {
             make.leading.equalTo(weatherImage.snp.trailing)
         }
     }
-//    func callWeather(lat: Double, lon: Double) {
-//        let url = "https://api.openweathermap.org/data/2.5/weather?"
-//        let param: Parameters = [
-//            "APIKey" : APIKey().weatherKey,
-//            "lat" : "\(lat)",
-//            "lon" : "\(lon)",
-//            "units" : "metric",
-//            "lang" : "kr"
-//        ]
-//        AF.request(url, parameters: param).responseDecodable(of: Weather.self) { response in
-//            switch response.result {
-//            case .success(let value):
-//                self.showWeather(data: value)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
     func showWeather(data: Weather?) {
         self.temperatureLabel.text = "\(data?.main.temp ?? 0.0)℃"
         self.otherFactors.text = "습도 : \(data?.main.humidity ?? 0)% | 풍속 : \(data?.wind.speed ?? 0.0)m/s"
@@ -157,6 +139,26 @@ extension ViewController {
             print(status)
         }
     }
+    
+    
+    func locationSettingAlert() {
+        let alert = UIAlertController(title: "권한 허용 거부됨!", message: "위치 권한 허용이 필요합니다", preferredStyle: .alert)
+    
+        let settingPage = UIAlertAction(title: "설정으로 이동", style: .default) { _ in
+            if let setting = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(setting)
+            }
+        }
+        
+        let cancelButton = UIAlertAction(title: "취소", style: .cancel)
+        
+        alert.addAction(settingPage)
+        alert.addAction(cancelButton)
+        
+        present(alert, animated: true)
+    }
+    
+    
 }
 extension ViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -182,5 +184,16 @@ extension ViewController: CLLocationManagerDelegate {
             }
         })
     }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+            switch status {
+            case .denied:
+                locationSettingAlert()
+            case .authorizedWhenInUse:
+                myLocalManager.startUpdatingLocation()
+            default:
+                break
+            }
+        }
 }
 
